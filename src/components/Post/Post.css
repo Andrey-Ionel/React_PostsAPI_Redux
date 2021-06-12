@@ -1,0 +1,26 @@
+.uk-dropcap::first-letter, .uk-dropcap > p:first-of-type::first-letter {
+  float:none;
+}
+
+ .antd-back-icon svg{
+  height: 2em;
+  width: 2em;
+ }
+
+ .ant-btn {
+  margin-left: 3px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+ }
+
+ .ant-btn:hover .antd-back-icon {
+  animation: moove 1s alternate infinite ease-out;
+ }
+
+ @keyframes moove {
+  to {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+  }
+}

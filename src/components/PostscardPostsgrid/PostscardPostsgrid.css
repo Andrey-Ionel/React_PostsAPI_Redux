@@ -1,0 +1,7 @@
+.uk-icon-link svg {
+  max-width: inherit;
+}
+
+.favorite-active svg path {
+  fill: rgb(128, 128, 128);
+}
