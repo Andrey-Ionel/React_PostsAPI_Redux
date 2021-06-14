@@ -1,1 +1,1 @@
-# React_TodoListAPI_Redux
+# React_PostsAPI_Redux
