@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import "./AlbumsCard.css";
 import React from "react";
 
-function AlbumsCard({ title, id, toggleFavoriteAlbums, favoriteAlbum }) {
+function AlbumsCard({ title, id, toggleFavorite, favoriteAlbum }) {
   const onClickFavorite = (e) => {
     e.preventDefault();
-    toggleFavoriteAlbums(id);
+    toggleFavorite(id);
   }
 
   return (
@@ -25,7 +25,7 @@ function AlbumsCard({ title, id, toggleFavoriteAlbums, favoriteAlbum }) {
         </div>
 
         <div className="uk-position-top-right uk-overlay">
-          <a href="" uk-icon="icon: heart; ratio: 2" onClick={onClickFavorite} className={favoriteAlbum === true ? "uk-icon favorite-active" : "uk-icon"}></a>
+          <a href="" uk-icon="icon: heart; ratio: 2" onClick={onClickFavorite} className={favoriteAlbum ? "uk-icon favorite-active" : "uk-icon"}></a>
         </div>
       </div>
     </div>

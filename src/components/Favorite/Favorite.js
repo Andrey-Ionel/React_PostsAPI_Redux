@@ -1,18 +1,18 @@
 import PropTypes from "prop-types";
 import "./Favorite.css";
 
-function FavoritePosts({ title, id, toggleFavoritePosts }) {
+function Favorite({ title, id, toggleFavorite, favoritePosts }) {
   return (
     <tbody>
       <tr>
-        <th>Post</th>
+        <th>{favoritePosts ? "Post" : "Album"}</th>
         <td>{title}</td>
         <td className="uk-text-right">
           <button
             className="uk-button"
             type="button"
             uk-icon="icon: close;"
-            onClick={() => toggleFavoritePosts(id)}
+            onClick={() => toggleFavorite(id)}
           ></button>
         </td>
       </tr>
@@ -20,10 +20,10 @@ function FavoritePosts({ title, id, toggleFavoritePosts }) {
   )
 }
 
-FavoritePosts.propTypes = {
+Favorite.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   toggleFavoritePosts: PropTypes.func
 }
 
-export default FavoritePosts;
+export default Favorite;

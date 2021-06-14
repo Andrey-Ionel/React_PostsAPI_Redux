@@ -7,11 +7,11 @@ function PostscardPostsgrid({
   body,
   title,
   id,
-  toggleFavoritePosts,
+  toggleFavorite,
   favoritePost }) {
   const onClickFavorite = (e) => {
     e.preventDefault();
-    toggleFavoritePosts(id);
+    toggleFavorite(id);
   }
   return (
     <div>
@@ -19,7 +19,7 @@ function PostscardPostsgrid({
         <div className="uk-card-header">
           <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
             {title && `${title.slice(0, 13)}...`}
-            <a href="/" className={favoritePost === true
+            <a href="/" className={favoritePost
               ? "uk-icon-link favorite-active"
               : "uk-icon-link"}
               uk-icon="heart"

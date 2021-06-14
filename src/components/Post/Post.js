@@ -11,7 +11,6 @@ import {
 import { LeftCircleTwoTone } from '@ant-design/icons';
 import { Button } from 'antd';
 
-
 function Post(props) {
   const { comments,
     getCommentsRequest,
@@ -44,12 +43,7 @@ function Post(props) {
   }
 
   useEffect(() => {
-    if (location.pathname.match("/Post")) {
-      getCommentsRequest();
-    }
-    return () => {
-      [];
-    }
+    getCommentsRequest();
   }, []);
 
   useEffect((comment) => {
@@ -76,8 +70,8 @@ function Post(props) {
           <Button type="primary"
             onClick={() => props.history.goBack()}>
             <LeftCircleTwoTone className="antd-back-icon" />
-          BACK...
-        </Button>
+            BACK...
+          </Button>
         </div>
         <div className="uk-section">
           <div className="uk-container">
@@ -85,12 +79,12 @@ function Post(props) {
               <span>{props.location.postTitle}
               </span>
               <a className="uk-text-small" href="#"> Author
-            </a>
+              </a>
             </h1>
             <div className="uk-article uk-dropcap uk-margin-large-bottom">
               <p>
                 {props.location.postBody}.
-            </p>
+              </p>
             </div>
             <hr />
             <h3 className="uk-margin-remove-top">Comments:</h3>
@@ -147,7 +141,7 @@ function Post(props) {
                   <button className="uk-button uk-button-primary" type="submit"
                     onClick={onClickDataSend}>
                     Post Comment
-                </button>
+                  </button>
                 </div>
               </fieldset>
             </form>

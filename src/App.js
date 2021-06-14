@@ -30,18 +30,12 @@ function App(props) {
       getPostsRequest()
         .catch(error => setErrorFetch(error));
     }
-    return () => {
-      [];
-    }
   }, []);
 
   useEffect(() => {
     if (location.pathname === "/Albums") {
       getAlbumsRequest()
         .catch(error => setErrorFetch(error));
-    }
-    return () => {
-      [];
     }
   }, []);
 

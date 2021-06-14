@@ -1,21 +1,19 @@
-import FavoritePosts from "./Favorite/FavoritePosts";
-import FavoriteAlbums from "./Favorite/FavoriteAlbums";
+import Favorite from "./Favorite/Favorite";
 import React from "react";
 import { connect } from "react-redux";
 
 function Navigation(props) {
   const { posts, albums,
-    toggleFavoritePosts,
-    toggleFavoriteAlbums } = props;
+    toggleFavorite } = props;
 
   const favoritePosts = posts.filter((post) => {
-    if (post.favoritePost === true) {
+    if (post.favoritePost) {
       return post.favoritePost;
     }
   })
 
   const favoriteAlbums = albums.filter((album) => {
-    if (album.favoriteAlbum === true) {
+    if (album.favoriteAlbum) {
       return album.favoriteAlbum;
     }
   })
@@ -58,19 +56,20 @@ function Navigation(props) {
                     </tr>
                   </thead>
                   {favoritePosts?.map((post) => (
-                    <FavoritePosts
+                    <Favorite
                       key={post.id}
                       title={post.title}
                       id={post.id}
-                      toggleFavoritePosts={toggleFavoritePosts}
+                      toggleFavorite={toggleFavorite}
+                      favoritePosts={favoritePosts}
                     />
                   ))}
                   {favoriteAlbums?.map((album) => (
-                    <FavoriteAlbums
+                    <Favorite
                       key={album.id}
                       title={album.title}
                       id={album.id}
-                      toggleFavoriteAlbums={toggleFavoriteAlbums}
+                      toggleFavorite={toggleFavorite}
                     />
                   ))
                   }

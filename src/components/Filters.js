@@ -6,17 +6,16 @@ import {
   getSortPostsRequest,
   getSearchPostsRequest
 } from "../store/actions/index";
+import { viewStatus } from "../utils/enums"
 
 function Filters(props) {
-  const { pageListView,
-    setPageListView,
-    pageGridView,
-    setPageGridView,
+  const {
+    viewType,
+    setViewType,
     setQuantityPosts,
     postsQuantityPage,
     getSortPostsRequest,
     getSearchPostsRequest } = props;
-
   const [name, setName] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [orderValue, setOrderValue] = useState("asc");
@@ -51,8 +50,8 @@ function Filters(props) {
     setOrderValue(e.target.value);
   }
 
-  const activeList = pageListView ? "uk-active" : "";
-  const activeGrid = pageGridView ? "uk-active" : "";
+  const activeList = viewType === viewStatus.list ? "uk-active" : "";
+  const activeGrid = viewType === viewStatus.grid ? "uk-active" : "";
 
   const onKeyPressDefault = (e) => {
     if (e.charCode === 13) {
@@ -93,12 +92,12 @@ function Filters(props) {
       <div className="uk-button-group uk-margin-left">
         <button
           className={`uk-button uk-button-default ${activeList}`}
-          onClick={() => { setPageGridView(false); setPageListView(true) }}>
+          onClick={() => { setViewType(viewStatus.list) }}>
           <span uk-icon="icon:  grid"></span>
         </button>
         <button
           className={`uk-button uk-button-default ${activeGrid}`}
-          onClick={() => { setPageGridView(true); setPageListView(false) }}>
+          onClick={() => { setViewType(viewStatus.grid) }}>
           <span uk-icon="icon:  list"></span>
         </button>
       </div>

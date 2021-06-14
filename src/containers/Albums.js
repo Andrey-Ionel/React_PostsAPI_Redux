@@ -9,11 +9,10 @@ import { FrownTwoTone } from '@ant-design/icons';
 import { toggleFavoriteAlbumsRequest } from "../store/actions/index"
 
 function Albums(props) {
-  const { albums, toggleFavoriteAlbumsRequest } = props;
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postsQuantityPage, setPostsQuantityPage] = useState(6);
 
+  const { albums, toggleFavoriteAlbumsRequest } = props;
   const indexOfLastPost = currentPage * postsQuantityPage;
   const indexOfFirstPost = indexOfLastPost - postsQuantityPage;
   const totalPosts = Math.ceil(albums.length / postsQuantityPage);
@@ -43,7 +42,7 @@ function Albums(props) {
   return (
     <main className="uk-main">
       <Navigation
-        toggleFavoriteAlbums={toggleFavoriteAlbums} />
+        toggleFavorite={toggleFavoriteAlbums} />
       <div className="uk-section">
         <div className="uk-container">
           <div className="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m">
@@ -52,7 +51,7 @@ function Albums(props) {
                 <AlbumsCard key={album.id}
                   id={album.id}
                   title={album.title}
-                  toggleFavoriteAlbums={toggleFavoriteAlbums}
+                  toggleFavorite={toggleFavoriteAlbums}
                   favoriteAlbum={album.favoriteAlbum}
                 />
               ))

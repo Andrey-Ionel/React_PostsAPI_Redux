@@ -7,10 +7,12 @@ import Navigation from "../components/Navigation";
 import { PostslistsView } from "../components/PostslistsView";
 import { PostsgridView } from "../components/PostsgridView";
 import { toggleFavoritePostsRequest } from "../store/actions/index"
+import { Result } from 'antd';
+import { FrownTwoTone } from '@ant-design/icons';
+import { viewStatus } from "../utils/enums"
 
 function Posts(props) {
-  const [pageListView, setPageListView] = useState(true);
-  const [pageGridView, setPageGridView] = useState(false);
+  const [viewType, setViewType] = useState(viewStatus.list)
   const [currentPage, setCurrentPage] = useState(1);
   const [postsQuantityPage, setPostsQuantityPage] = useState(6);
 
@@ -49,27 +51,33 @@ function Posts(props) {
   return (
     <main className="uk-main">
       <Navigation
-        toggleFavoritePosts={toggleFavoritePosts}
+        toggleFavorite={toggleFavoritePosts}
       />
       <div className="uk-section">
         <div className="uk-container">
           <Filters
             setQuantityPosts={setQuantityPosts}
-            pageListView={pageListView}
-            setPageListView={setPageListView}
-            pageGridView={pageGridView}
-            setPageGridView={setPageGridView}
+            viewType={viewType}
+            setViewType={setViewType}
             postsQuantityPage={postsQuantityPage}
           />
-          {pageListView ?
-            <PostslistsView
-              currentPageCards={currentPageCards}
-              toggleFavoritePosts={toggleFavoritePosts}
-            /> :
-            <PostsgridView
-              currentPageCards={currentPageCards}
-              toggleFavoritePosts={toggleFavoritePosts}
-            />}
+          {currentPageCards.length > 0 ?
+            viewType === viewStatus.list ?
+              <PostslistsView
+                currentPageCards={currentPageCards}
+                toggleFavorite={toggleFavoritePosts}
+              /> :
+              <PostsgridView
+                currentPageCards={currentPageCards}
+                toggleFavorite={toggleFavoritePosts}
+              />
+            : <div className="uk-align-center">
+              <Result
+                icon={<FrownTwoTone />}
+                title="Sorry, posts not found."
+              />
+            </div>
+          }
           <LMButton
             postsOrAlbums={posts}
             postsQuantityPage={postsQuantityPage}
