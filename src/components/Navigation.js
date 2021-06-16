@@ -6,17 +6,9 @@ function Navigation(props) {
   const { posts, albums,
     toggleFavorite } = props;
 
-  const favoritePosts = posts.filter((post) => {
-    if (post.favoritePost) {
-      return post.favoritePost;
-    }
-  })
+  const favoritePosts = posts.filter((post) => post.favoritePost);
 
-  const favoriteAlbums = albums.filter((album) => {
-    if (album.favoriteAlbum) {
-      return album.favoriteAlbum;
-    }
-  })
+  const favoriteAlbums = albums.filter((album) => album.favoriteAlbum);
 
   return (
     <nav className="uk-navbar uk-navbar-container" uk-navbar="true">
