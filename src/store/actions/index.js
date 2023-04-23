@@ -1,17 +1,18 @@
 import api from '../../api';
-import { getAlbums, toggleFavoriteAlbums } from '../reducer/albums';
-import { getPosts, searchPosts, sortPosts, toggleFavoritePosts } from '../reducer/posts';
+import { getAlbums, getErrorAlbums, loadingAlbums, toggleFavoriteAlbums } from '../reducer/albums';
+import { getErrorPosts, getPosts, loadingPosts, searchPosts, sortPosts, toggleFavoritePosts } from '../reducer/posts';
 import { createComments, getComments } from '../reducer/comments';
 
 export const getPostsRequest = () => {
   return async (dispatch) => {
     try {
+      dispatch(loadingPosts())
       await api.get(`/posts`)
         .then(response => {
           dispatch(getPosts(response.data));
         })
     } catch (error) {
-      console.log(error)
+      dispatch(getErrorPosts(error))
     }
   }
 }
@@ -19,12 +20,13 @@ export const getPostsRequest = () => {
 export const getAlbumsRequest = () => {
   return async (dispatch) => {
     try {
+      dispatch(loadingAlbums())
       await api.get(`/albums`)
         .then(response => {
           dispatch(getAlbums(response.data));
         })
     } catch (error) {
-      console.log(error)
+      dispatch(getErrorAlbums(error))
     }
   }
 }

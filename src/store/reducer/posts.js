@@ -2,13 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   posts: [],
+  isLoading: false,
+  error: ''
 }
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
+    loadingPosts (state) {
+      state.isLoading = true
+    },
+    getErrorPosts (state, acton) {
+      state.isLoading = false
+      state.error = acton.payload.message
+    },
     getPosts (state, acton) {
+      state.isLoading = false
       state.posts = acton.payload
     },
     sortPosts (state, acton) {
@@ -26,6 +36,13 @@ const postsSlice = createSlice({
   }
 })
 
-export const { getPosts, sortPosts, searchPosts, toggleFavoritePosts } = postsSlice.actions
+export const {
+  loadingPosts,
+  getErrorPosts,
+  getPosts,
+  sortPosts,
+  searchPosts,
+  toggleFavoritePosts
+} = postsSlice.actions
 
 export default postsSlice.reducer;

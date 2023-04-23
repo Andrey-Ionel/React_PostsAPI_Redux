@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Pagination } from '../components/Pagination';
 import Filters from '../components/Filters';
 import { LMButton } from '../components/LMButton';
@@ -15,6 +15,8 @@ function Posts(props) {
   const [viewType, setViewType] = useState(viewStatus.list)
   const [currentPage, setCurrentPage] = useState(1);
   const [postsQuantityPage, setPostsQuantityPage] = useState(6);
+  const {error, isLoading} = useSelector(state => state?.postsReducer);
+  const statusCode = (error + '').replace(/\D/g, '');
 
   const { posts, getPostsRequest, toggleFavoritePostsRequest } = props;
   const indexOfLastPost = currentPage * postsQuantityPage;
@@ -54,6 +56,18 @@ function Posts(props) {
       <Navigation
         toggleFavorite={toggleFavoritePosts}
       />
+      {isLoading &&
+      <div className="uk-cover">
+        <p className="uk-logo">Loading...</p>
+      </div>}
+      {!!error &&
+        <Result
+          status={statusCode}
+          title={<p>Sorry, something went wrong.</p>}
+          subTitle={<p>{error}</p>}
+        />
+      }
+      {!isLoading && !error &&
       <div className="uk-section">
         <div className="uk-container">
           <Filters
@@ -62,7 +76,7 @@ function Posts(props) {
             setViewType={setViewType}
             postsQuantityPage={postsQuantityPage}
           />
-          {currentPageCards.length > 0 ?
+          {!!currentPageCards.length ?
             viewType === viewStatus.list ?
               <PostslistsView
                 currentPageCards={currentPageCards}
@@ -91,6 +105,7 @@ function Posts(props) {
           />
         </div>
       </div >
+      }
     </main >
   )
 }
