@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import PostscardPostsLists
-  from "./PostscardPostsLists/PostscardPostsLists";
+  from './PostscardPostsLists/PostscardPostsLists';
 
 export function PostslistsView({
   currentPageCards,

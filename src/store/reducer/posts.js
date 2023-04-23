@@ -1,32 +1,31 @@
-import {
-  SET_POSTS,
-  SORT_POSTS,
-  SEARCH_POSTS,
-  TOGGLE_FAVORITE_POSTS,
-} from "../actions/index.js";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   posts: [],
 }
 
-const postsReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case SET_POSTS:
-      return { ...state, posts: payload };
-    case SORT_POSTS:
-      return { ...state, posts: payload };
-    case SEARCH_POSTS:
-      return { ...state, posts: payload };
-    case TOGGLE_FAVORITE_POSTS:
-      return {
-        ...state, posts: state.posts.map(post =>
-          (post.id === payload.id)
-            ? ({ ...post, favoritePost: payload.favoritePost })
-            : post)
-      }
-    default:
-      return state;
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    getPosts (state, acton) {
+      state.posts = acton.payload
+    },
+    sortPosts (state, acton) {
+      state.posts = acton.payload
+    },
+    searchPosts (state, acton) {
+      state.posts = acton.payload
+    },
+    toggleFavoritePosts (state, action) {
+      state.posts.map(post =>
+        (post.id === action.payload.id)
+          ? post.favoritePost = action.payload.favoritePost
+          : post)
+    }
   }
-}
+})
 
-export default postsReducer;
+export const { getPosts, sortPosts, searchPosts, toggleFavoritePosts } = postsSlice.actions
+
+export default postsSlice.reducer;

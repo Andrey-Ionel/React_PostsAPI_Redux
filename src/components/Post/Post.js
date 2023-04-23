@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import "./Post.css";
-import Navigation from "../Navigation";
-import { Redirect } from "react-router-dom";
-import Comments from "../Comments";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import Navigation from '../Navigation';
+import Comments from '../Comments';
 import {
   getCommentsRequest,
   createCommentsRequest
-} from "../../store/actions/index";
+} from '../../store/actions';
+import './Post.css';
 import { LeftCircleTwoTone } from '@ant-design/icons';
 import { Button } from 'antd';
 
 function Post(props) {
-  const { comments,
+  const {
+    comments,
     getCommentsRequest,
-    createCommentsRequest } = props;
+    createCommentsRequest
+  } = props;
 
   const [author, setAuthor] = useState("");
   const [email, setEmail] = useState("");
@@ -26,7 +28,7 @@ function Post(props) {
 
   const onAddComment = (e) => (setCommentTitle(e.target.value));
 
-  const onClickDataSend = (e) => {
+  const onClickDataSend = () => {
     if (commentTitle.trim()
       && email.trim()
       && author.trim()) {
@@ -49,9 +51,6 @@ function Post(props) {
   useEffect((comment) => {
     if (comments.comment !== comments.comment) {
       createCommentsRequest(comment);
-    }
-    return () => {
-      null;
     }
   }, []);
 

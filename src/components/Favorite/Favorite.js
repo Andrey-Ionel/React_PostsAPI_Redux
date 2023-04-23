@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import "./Favorite.css";
+import PropTypes from 'prop-types';
+import './Favorite.css';
 
 function Favorite({ title, id, toggleFavorite, favoritePosts }) {
   return (

@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import "./AlbumsCard.css";
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './AlbumsCard.css';
 
 function AlbumsCard({ title, id, toggleFavorite, favoriteAlbum }) {
   const onClickFavorite = (e) => {

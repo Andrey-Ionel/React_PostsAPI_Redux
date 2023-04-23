@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import "./PostscardPostsLists.css";
-import { NavLink } from "react-router-dom";
-import React from "react";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './PostscardPostsLists.css';
 
 function PostscardPostsLists({
   body,
@@ -16,7 +16,7 @@ function PostscardPostsLists({
   return (
     <div>
       <div
-        className="uk-card uk-card-default uk-margin-medium-bottom 
+        className="uk-card uk-card-default uk-margin-medium-bottom
         uk-child-width-1-2@s uk-grid-collapse uk-margin"
         uk-grid="true"
       >

@@ -1,10 +1,10 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from "redux-thunk";
-import postsReducer from "./reducer/posts";
-import commentsReducer from "./reducer/comments";
-import albumsReducer from "./reducer/albums";
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import postsReducer from '../store/reducer/posts';
+import commentsReducer from '../store/reducer/comments';
+import albumsReducer from '../store/reducer/albums';
 
 const rootReducer = combineReducers({ postsReducer, commentsReducer, albumsReducer });
 
-export default createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+export default configureStore({
+    reducer: rootReducer
+});

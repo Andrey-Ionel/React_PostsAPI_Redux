@@ -1,51 +1,17 @@
-import React,
-{ useEffect, useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Route,
   Switch
-} from "react-router-dom";
-import Albums from "./containers/Albums";
-import Post from "./components/Post/Post";
-import Posts from "./containers/Posts";
-import ScrollToTop from "./Hooks/ScrollToTop";
-import {
-  getPostsRequest,
-  getAlbumsRequest,
-  toggleFavoritePostsRequest,
-  toggleFavoriteAlbumsRequest
-} from "./store/actions/index";
+} from 'react-router-dom';
+import Albums from './containers/Albums';
+import Post from './components/Post/Post';
+import Posts from './containers/Posts';
+import ScrollToTop from './Hooks/ScrollToTop';
 import { Result } from 'antd';
 
-function App(props) {
-  const [errorFetch, setErrorFetch] = useState(null);
-  const { getPostsRequest,
-    getAlbumsRequest,
-    toggleFavoritePostsRequest,
-    toggleFavoriteAlbumsRequest } = props;
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      getPostsRequest()
-        .catch(error => setErrorFetch(error));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (location.pathname === "/Albums") {
-      getAlbumsRequest()
-        .catch(error => setErrorFetch(error));
-    }
-  }, []);
-
-
-  useEffect((favorite) => {
-    if (favorite !== favorite) {
-      toggleFavoritePostsRequest(id);
-      toggleFavoriteAlbumsRequest(id);
-    }
-  }, []);
+function App() {
+  const [errorFetch] = useState(null);
 
   if (errorFetch) {
     return <Result
@@ -66,20 +32,5 @@ function App(props) {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    posts: state.postsReducer.posts,
-    albums: state.albumsReducer.albums,
-  }
-}
 
-const mapDispatchToProps = {
-  getPostsRequest,
-  getAlbumsRequest,
-  toggleFavoritePostsRequest,
-  toggleFavoriteAlbumsRequest
-}
-
-
-export default React.memo(connect(mapStateToProps,
-  mapDispatchToProps)(App));
+export default React.memo(App);

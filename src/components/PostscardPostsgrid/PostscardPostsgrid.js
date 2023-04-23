@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import "./PostscardPostsgrid.css";
-import { NavLink } from "react-router-dom";
-import React from "react";
+import { NavLink } from 'react-router-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
+import './PostscardPostsgrid.css';
 
 function PostscardPostsgrid({
   body,

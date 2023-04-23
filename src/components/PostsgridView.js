@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import PostscardPostsgrid
-  from "./PostscardPostsgrid/PostscardPostsgrid";
+  from './PostscardPostsgrid/PostscardPostsgrid';
 
 export function PostsgridView({
   currentPageCards,

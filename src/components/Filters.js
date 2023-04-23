@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { useDebounce } from "../Hooks/UseDebounce";
-import React from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useDebounce } from '../Hooks/UseDebounce';
 import {
   getSortPostsRequest,
   getSearchPostsRequest
-} from "../store/actions/index";
-import { viewStatus } from "../utils/enums"
+} from '../store/actions';
+import { viewStatus } from '../utils/enums'
 
 function Filters(props) {
   const {

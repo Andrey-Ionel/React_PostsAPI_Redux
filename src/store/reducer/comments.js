@@ -1,23 +1,24 @@
-import {
-  GET_COMMENTS,
-  CREATE_COMMENTS
-} from "../actions/index.js";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   comments: [],
 }
 
-const commentsReducer = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case GET_COMMENTS:
-      return { ...state, comments: payload };
-    case CREATE_COMMENTS:
-      return (payload.commentTitle.trim() && payload.email.trim() && payload.author.trim())
-        ? { ...state, comments: [...state.comments, payload] }
+const commentsSlice = createSlice({
+  name: 'comments',
+  initialState,
+  reducers: {
+    getComments (state, acton) {
+      state.comments = acton.payload
+    },
+    createComments (state, action) {
+      (action.payload.commentTitle.trim() && action.payload.email.trim() && action.payload.author.trim())
+        ? state.comments = [...state.comments, action.payload]
         : state
-    default:
-      return state;
+    }
   }
-}
+})
 
-export default commentsReducer;
+export const { getComments, createComments } = commentsSlice.actions
+
+export default commentsSlice.reducer;

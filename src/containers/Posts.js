@@ -1,27 +1,33 @@
-import React, { useState } from "react"
-import { connect } from "react-redux";
-import { Pagination } from "../components/Pagination";
-import Filters from "../components/Filters";
-import { LMButton } from "../components/LMButton";
-import Navigation from "../components/Navigation";
-import { PostslistsView } from "../components/PostslistsView";
-import { PostsgridView } from "../components/PostsgridView";
-import { toggleFavoritePostsRequest } from "../store/actions/index"
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux';
+import { Pagination } from '../components/Pagination';
+import Filters from '../components/Filters';
+import { LMButton } from '../components/LMButton';
+import Navigation from '../components/Navigation';
+import { PostslistsView } from '../components/PostslistsView';
+import { PostsgridView } from '../components/PostsgridView';
+import { getPostsRequest, toggleFavoritePostsRequest } from '../store/actions'
 import { Result } from 'antd';
 import { FrownTwoTone } from '@ant-design/icons';
-import { viewStatus } from "../utils/enums"
+import { viewStatus } from '../utils/enums'
 
 function Posts(props) {
   const [viewType, setViewType] = useState(viewStatus.list)
   const [currentPage, setCurrentPage] = useState(1);
   const [postsQuantityPage, setPostsQuantityPage] = useState(6);
 
-  const { posts, toggleFavoritePostsRequest } = props;
+  const { posts, getPostsRequest, toggleFavoritePostsRequest } = props;
   const indexOfLastPost = currentPage * postsQuantityPage;
   const indexOfFirstPost = indexOfLastPost - postsQuantityPage;
   const totalPosts = Math.ceil(posts.length / postsQuantityPage);
   const currentPageCards = posts.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      getPostsRequest().catch(error => console.log(error));
+    }
+  }, []);
 
   const addMoreCards = (value) => {
     const addCards = (parseInt(value) + 6);
@@ -34,15 +40,10 @@ function Posts(props) {
 
   const toggleFavoritePosts = (id) => {
     posts?.map((post) => {
-      if (post.id === id && post.favoritePost === undefined) {
-        post.favoritePost = true;
-        toggleFavoritePostsRequest(id, post.favoritePost);
-      } else if (post.id === id && post.favoritePost === false) {
-        post.favoritePost = true;
-        toggleFavoritePostsRequest(id, post.favoritePost);
-      } else if (post.id === id && post.favoritePost === true) {
-        post.favoritePost = false;
-        toggleFavoritePostsRequest(id, post.favoritePost);
+      if (post.id === id && !post.favoritePost) {
+        toggleFavoritePostsRequest(id, true);
+      }  else if (post.id === id && !!post.favoritePost) {
+        toggleFavoritePostsRequest(id, false);
       }
       return post;
     })
@@ -99,6 +100,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  getPostsRequest,
   toggleFavoritePostsRequest,
 }
 

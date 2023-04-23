@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Pagination } from "../components/Pagination";
-import AlbumsCard from "../components/AlbumsCard/AlbumsCard";
-import { LMButton } from "../components/LMButton";
-import Navigation from "../components/Navigation";
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
+import { Pagination } from '../components/Pagination';
+import AlbumsCard from '../components/AlbumsCard/AlbumsCard';
+import { LMButton } from '../components/LMButton';
+import Navigation from '../components/Navigation';
 import { Result } from 'antd';
 import { FrownTwoTone } from '@ant-design/icons';
-import { toggleFavoriteAlbumsRequest } from "../store/actions/index"
+import { toggleFavoriteAlbumsRequest } from '../store/actions'
+import { getAlbumsRequest } from '../store/actions';
 
 function Albums(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsQuantityPage, setPostsQuantityPage] = useState(6);
+  const dispatch = useDispatch();
 
   const { albums, toggleFavoriteAlbumsRequest } = props;
   const indexOfLastPost = currentPage * postsQuantityPage;
@@ -19,6 +21,12 @@ function Albums(props) {
   const currentPageCards = albums.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  useEffect(() => {
+    if (location.pathname === "/Albums") {
+      dispatch(getAlbumsRequest()).catch(error => console.log(error));
+    }
+  }, []);
+
   const addMoreCards = (value) => {
     const addCards = (parseInt(value) + 6);
     setPostsQuantityPage(addCards);
@@ -26,15 +34,10 @@ function Albums(props) {
 
   const toggleFavoriteAlbums = (id) => {
     albums?.map((album) => {
-      if (album.id === id && album.favoriteAlbum === undefined) {
-        album.favoriteAlbum = true;
-        toggleFavoriteAlbumsRequest(id, album.favoriteAlbum);
-      } else if (album.id === id && album.favoriteAlbum === false) {
-        album.favoriteAlbum = true;
-        toggleFavoriteAlbumsRequest(id, album.favoriteAlbum);
-      } else if (album.id === id && album.favoriteAlbum === true) {
-        album.favoriteAlbum = false;
-        toggleFavoriteAlbumsRequest(id, album.favoriteAlbum);
+      if (album.id === id && !album.favoriteAlbum) {
+        toggleFavoriteAlbumsRequest(id, true);
+      } else if (album.id === id && !!album.favoriteAlbum) {
+        toggleFavoriteAlbumsRequest(id, false);
       }
       return album;
     })
@@ -76,9 +79,11 @@ function Albums(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  albums: state.albumsReducer.albums,
-});
+const mapStateToProps = (state) => {
+  return {
+    albums: state.albumsReducer.albums,
+  }
+};
 
 const mapDispatchToProps = {
   toggleFavoriteAlbumsRequest,

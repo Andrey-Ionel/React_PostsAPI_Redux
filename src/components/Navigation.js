@@ -1,6 +1,6 @@
-import Favorite from "./Favorite/Favorite";
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
+import Favorite from './Favorite/Favorite';
 
 function Navigation(props) {
   const { posts, albums,
