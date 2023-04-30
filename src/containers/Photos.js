@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, {memo, useEffect, useMemo, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getPhotosRequest } from '../store/actions'
@@ -30,21 +30,18 @@ const Photos = () => {
 
     useEffect(() => {
         addEventListener('scroll', handleScroll)
-        if (!!photos?.length && photos?.length < totalCount) {
-            setFetching(false);
-        }
         return () => {
             removeEventListener('scroll', handleScroll)
         }
     }, []);
 
-    const handleScroll = useCallback((e) => {
+    const handleScroll = useMemo(() => (e) => {
         const isScreenBottom = e?.target?.documentElement?.scrollHeight -
           (e?.target?.documentElement?.scrollTop + window?.innerHeight) < 150;
         if (isScreenBottom) {
             setFetching(true);
         }
-    }, [ photos, totalCount])
+    }, [])
 
     const setQuantityPhotos = (value) => {
         setPhotosQuantityPage(value);
