@@ -23,6 +23,10 @@ function Navigation(props) {
             ? "uk-active" : ""}>
             <a href="/Albums">Albums</a>
           </li>
+          <li className={location.pathname === "/Photos"
+              ? "uk-active" : ""}>
+            <a href="/Photos">Photos</a>
+          </li>
         </ul>
       </div>
       <div className="uk-navbar-right">

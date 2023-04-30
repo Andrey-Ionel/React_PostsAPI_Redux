@@ -12,6 +12,7 @@ export function PostsgridView({
           title={post.title}
           id={post.id}
           body={post.body}
+          thumbnailUrl={post.thumbnailUrl}
           toggleFavorite={toggleFavorite}
           favoritePost={post.favoritePost}
         />

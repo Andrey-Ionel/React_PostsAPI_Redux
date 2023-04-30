@@ -13,13 +13,13 @@ const albumsSlice = createSlice({
     loadingAlbums (state) {
       state.isLoading = true
     },
-    getErrorAlbums (state, acton) {
+    getErrorAlbums (state, action) {
       state.isLoading = false
-      state.error = acton.payload.message
+      state.error = action.payload.message
     },
-    getAlbums (state, acton) {
+    getAlbums (state, action) {
       state.isLoading = false
-      state.albums = acton.payload
+      state.albums = action.payload
     },
     toggleFavoriteAlbums (state, action) {
       state.albums.map(album =>

@@ -7,12 +7,15 @@ function PostscardPostsLists({
   body,
   title,
   id,
+  thumbnailUrl,
   toggleFavorite,
-  favoritePost }) {
+  favoritePost
+}) {
   const onClickFavorite = (e) => {
     e.preventDefault();
     toggleFavorite(id);
   }
+
   return (
     <div>
       <div
@@ -24,6 +27,12 @@ function PostscardPostsLists({
           <img src="https://picsum.photos/600/400" alt="" uk-cover="true" />
           <canvas width="600" height="400"></canvas>
         </div>
+        {!!thumbnailUrl &&
+          <div className="uk-card-media-left uk-cover-container">
+            <img src={thumbnailUrl} alt="" uk-cover="true"/>
+            <canvas width="600" height="400"></canvas>
+          </div>
+        }
         <div>
           <div className="uk-card-body">
             <h3 className="uk-card-title uk-margin-remove-bottom
@@ -36,7 +45,7 @@ function PostscardPostsLists({
                 onClick={onClickFavorite}></a>
             </h3>
             <p>
-              {body.length > 120 ? `${body.slice(0, 120)} ...` : body}
+              {body?.length > 120 ? `${body.slice(0, 120)} ...` : body}
             </p>
             <NavLink to={{ pathname: "/Post/" + id, postTitle: title, postBody: body }}
               className="uk-button uk-button-text" >
@@ -53,6 +62,7 @@ PostscardPostsLists.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   body: PropTypes.string,
+  thumbnailUrl: PropTypes.string,
   favoritePost: PropTypes.bool,
   toggleFavoritePosts: PropTypes.func
 }

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './Favorite.css';
+import React, { memo } from 'react';
 
 function Favorite({ title, id, toggleFavorite, favoritePosts }) {
   return (
@@ -26,4 +27,4 @@ Favorite.propTypes = {
   toggleFavoritePosts: PropTypes.func
 }
 
-export default Favorite;
+export default memo(Favorite);

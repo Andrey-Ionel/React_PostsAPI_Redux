@@ -28,7 +28,7 @@ function PostscardPostsgrid({
         </div>
         <div className="uk-card-body">
           <p>
-            {body.length > 120 ? `${body.slice(0, 120)} ...` : body}
+            {body?.length > 120 ? `${body.slice(0, 120)} ...` : body}
           </p>
         </div>
         <div className="uk-card-footer">

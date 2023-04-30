@@ -1,7 +1,16 @@
 import api from '../../api';
 import { getAlbums, getErrorAlbums, loadingAlbums, toggleFavoriteAlbums } from '../reducer/albums';
-import { getErrorPosts, getPosts, loadingPosts, searchPosts, sortPosts, toggleFavoritePosts } from '../reducer/posts';
+import {
+  getErrorPosts,
+  getPosts,
+  loadingPosts,
+  searchPosts,
+  sortPosts,
+  toggleFavoritePosts
+} from '../reducer/posts';
 import { createComments, getComments } from '../reducer/comments';
+import { getPhotos, getErrorPhotos, getTotalCount } from '../reducer/photos';
+import axios from 'axios';
 
 export const getPostsRequest = () => {
   return async (dispatch) => {
@@ -13,6 +22,22 @@ export const getPostsRequest = () => {
         })
     } catch (error) {
       dispatch(getErrorPosts(error))
+    }
+  }
+}
+
+export const getPhotosRequest = (page, totalCount) => {
+  return async (dispatch) => {
+    try {
+      await axios.get(`https://jsonplaceholder.typicode.com/photos?_limit=10&_page=${page}`)
+        .then(response => {
+          dispatch(getPhotos(response.data));
+          if(!totalCount) {
+            dispatch(getTotalCount(response.headers['x-total-count']));
+          }
+        })
+    } catch (error) {
+      dispatch(getErrorPhotos(error))
     }
   }
 }

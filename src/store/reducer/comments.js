@@ -8,8 +8,8 @@ const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    getComments (state, acton) {
-      state.comments = acton.payload
+    getComments (state, action) {
+      state.comments = action.payload
     },
     createComments (state, action) {
       (action.payload.commentTitle.trim() && action.payload.email.trim() && action.payload.author.trim())

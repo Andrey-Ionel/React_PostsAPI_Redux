@@ -13,19 +13,19 @@ const postsSlice = createSlice({
     loadingPosts (state) {
       state.isLoading = true
     },
-    getErrorPosts (state, acton) {
+    getErrorPosts (state, action) {
       state.isLoading = false
-      state.error = acton.payload.message
+      state.error = action.payload.message
     },
-    getPosts (state, acton) {
+    getPosts (state, action) {
       state.isLoading = false
-      state.posts = acton.payload
+      state.posts = action.payload
     },
-    sortPosts (state, acton) {
-      state.posts = acton.payload
+    sortPosts (state, action) {
+      state.posts = action.payload
     },
-    searchPosts (state, acton) {
-      state.posts = acton.payload
+    searchPosts (state, action) {
+      state.posts = action.payload
     },
     toggleFavoritePosts (state, action) {
       state.posts.map(post =>

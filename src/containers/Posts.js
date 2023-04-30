@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { connect, useSelector } from 'react-redux';
 import { Pagination } from '../components/Pagination';
 import Filters from '../components/Filters';
@@ -40,16 +40,16 @@ function Posts(props) {
     setPostsQuantityPage(value);
   }
 
-  const toggleFavoritePosts = (id) => {
+  const toggleFavoritePosts = useCallback((id) => {
     posts?.map((post) => {
       if (post.id === id && !post.favoritePost) {
         toggleFavoritePostsRequest(id, true);
       }  else if (post.id === id && !!post.favoritePost) {
         toggleFavoritePostsRequest(id, false);
       }
-      return post;
+      return post
     })
-  }
+  }, [posts])
 
   return (
     <main className="uk-main">
